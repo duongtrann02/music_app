@@ -12,6 +12,7 @@ var loginScreen = document.querySelector(".login-screen")
 var headerScreen = document.querySelector(".header")
 function handleBtnLogin() {
     if (loginButton.onclick) {
+        console.log('clicked')
         loginScreen.setAttribute("style", "visibility: visible;");
     }
 }
@@ -24,21 +25,21 @@ function closeLoginScreen() {
 }
 
 
-var uploadButton = document.querySelector(".upload")
-var uploadScreen = document.querySelector(".upload-screen")
-var headerScreen = document.querySelector(".header")
-function handleBtnLogin() {
-    if (uploadButton.onclick) {
-        uploadScreen.setAttribute("style", "visibility: visible;");
-    }
-}
+// var uploadButton = document.querySelector(".upload")
+// var uploadScreen = document.querySelector(".upload-screen")
+// var headerScreen = document.querySelector(".header")
+// function handleBtnLogin() {
+//     if (uploadButton.onclick) {
+//         uploadScreen.setAttribute("style", "visibility: visible;");
+//     }
+// }
 
-var closeButton2 = document.querySelector('.closeUploadScreen')
-function closeLoginScreen() {
-    if (closeButton2.onclick) {
-        uploadScreen.setAttribute("style", "visibility: hidden;");
-    }
-}
+// var closeButton2 = document.querySelector('.closeUploadScreen')
+// function closeLoginScreen() {
+//     if (closeButton2.onclick) {
+//         uploadScreen.setAttribute("style", "visibility: hidden;");
+//     }
+// }
 
 
 
@@ -108,8 +109,7 @@ const makeAllPlays = () => {
     })
 }
 
-let index = 0
-
+let index = 0;
 Array.from(document.getElementsByClassName('playListPlay')).forEach((element) => {
     element.addEventListener('click', (e) => {
         index = e.target.id;
@@ -117,7 +117,7 @@ Array.from(document.getElementsByClassName('playListPlay')).forEach((element) =>
         makeAllPlays();
         e.target.classList.remove('fa-circle-play');
         e.target.classList.add('fa-circle-pause');
-        // music.src = `./src/audio/Em khiến anh muốn trở thành người Hà Nội.mp3`;
+        // music.src = `./src/audio/${index}.mp3`;
         // music.play();
         let song_title = songs.filter((ele)=>{
             return ele.id == index
@@ -147,16 +147,78 @@ function PlaySong(songName) {
 
 let currentStart = document.getElementById('current-start')
 let songLength = document.getElementById('song-length')
+let seek = document.getElementById('seek')
+let bar2 = document.getElementById('bar2')
+let dot = document.getElementsByClassName('dot')[0];
 
-// music.addEventListener('timeipdate', () => {
-//     let music_curr = music.currentTime;
-//     let music_dur = music.duration;
+music.addEventListener('timeupdate', () => {
+    let music_curr = music.currentTime;
+    let music_dur = music.duration;
 
-//     let min = Math.floor(music_dur / 60)
-//     let sec = Math.floor(music_dur % 60)
+    let min = Math.floor(music_dur / 60)
+    let sec = Math.floor(music_dur % 60)
+    if (sec<10) {
+        sec = `0${sec}`
+    }
+    songLength.innerText = `${min}:${sec}`
 
+    let min1 = Math.floor(music_curr / 60)
+    let sec1 = Math.floor(music_curr % 60)
+    if (sec1<10) {
+        sec1 = `0${sec1}`
+    }
+    currentStart.innerText = `${min1}:${sec1}`
 
+    let progressBar = parseInt((music.currentTime/music.duration)*100);
+    seek.value = progressBar;
+    let seekbar = seek.value;
+    bar2.style.width = `${seekbar}%`
+    dot.style.left = `${seekbar}%`
+})
 
-//     songLength.innerText = `${min}:${sec}`
+seek.addEventListener('change', ()=>{
+    music.currentTime = seek.value * music.duration / 100;
+})
 
-// })
+music.addEventListener('ended', ()=>{
+    masterPlay.classList.add('fa-play')
+    masterPlay.classList.remove('fa-pause')
+})
+
+let vol_icon = document.getElementById('vol-icon');
+let vol = document.getElementById('vol');
+let vol_dot = document.getElementById('vol-dot');
+let vol_bar = document.getElementsByClassName('vol_bar')[0];
+
+vol.addEventListener('change', ()=>{
+    if(vol.value == 0 ){
+        vol_icon.classList.remove('fa-volume-high')
+        vol_icon.classList.remove('fa-volume-low')
+        vol_icon.classList.remove('fa-volume-off')
+        vol_icon.classList.add('fa-volume-xmark')
+    }
+    if(vol.value > 0 ){
+        vol_icon.classList.remove('fa-volume-high')
+        vol_icon.classList.remove('fa-volume-low')
+        vol_icon.classList.add('fa-volume-off')
+        vol_icon.classList.remove('fa-volume-xmark')
+    }
+    if(vol.value > 20 ){
+        vol_icon.classList.remove('fa-volume-high')
+        vol_icon.classList.add('fa-volume-low')
+        vol_icon.classList.remove('fa-volume-off')
+        vol_icon.classList.remove('fa-volume-xmark')
+    }
+    if(vol.value > 60 ){
+        vol_icon.classList.add('fa-volume-high')
+        vol_icon.classList.remove('fa-volume-low')
+        vol_icon.classList.remove('fa-volume-off')
+        vol_icon.classList.remove('fa-volume-xmark')
+    }
+
+    let vol_a = vol.value
+    vol_bar.style.width = `${vol_a}%}`;
+    vol_dot.style.left = `${vol_a}%}`;
+    music.volume = vol_a/100;
+})
+

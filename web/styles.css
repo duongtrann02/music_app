@@ -265,6 +265,7 @@ header .play-part .bar .bar2 {
     width: 0%;
     height: 100%;
     top: 14px;
+    /* transition: .1s linear; */
 }
 
 header .play-part .bar .dot {
@@ -274,7 +275,7 @@ header .play-part .bar .dot {
     background-color: #d6d6d6;
     border-radius: 50%;
     top: 11px;
-    transition: 1s linear;
+    /* transition: .1s linear; */
 }
 
 header .play-part .bar input {
