@@ -187,8 +187,8 @@ music.addEventListener('ended', ()=>{
 
 let vol_icon = document.getElementById('vol-icon');
 let vol = document.getElementById('vol');
-let vol_dot = document.getElementById('vol-dot');
-let vol_bar = document.getElementsByClassName('vol_bar')[0];
+let vol_bar = document.getElementById('vol-bar');
+let vol_dot = document.getElementsByClassName('vol-dot')[0];
 
 vol.addEventListener('change', ()=>{
     if(vol.value == 0 ){

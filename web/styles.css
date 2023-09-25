@@ -293,7 +293,7 @@ header .play-part .vol {
     width: 100px;
     height: 2px;
     margin-left: 50px;
-    background: #0e0e0e;
+    /* background: #d6d6d6; */
 }
 
 header .play-part .vol .fa-solid {
@@ -317,23 +317,22 @@ header .play-part .vol input {
 
 header .play-part .vol .vol-bar {
     position: absolute;
-    background: #d6d6d6;
+    background-color: #d6d6d6;
     width: 0%;
     height: 100%;
     top: 14px;
     left: 20px;
-    transition: .3s linear;
 }
 
 header .play-part .vol .vol-dot {
     position: absolute;
-    background-color: #d6d6d6;
+    /* background-color: #d6d6d6; */
     width: 8px;
     height: 8px;
     border-radius: 50%;
     top: 12px;
     left: 20px;
-    transition: .3s linear;
+    /* visibility: hidden; */
 }
 
 header .play-part .song {
