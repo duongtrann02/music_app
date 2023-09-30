@@ -68,6 +68,22 @@ header .list-part {
     border-radius: 20px;
 }
 
+header .search-part {
+    position: fixed;
+    width: 74%;
+    right: 5px;
+    margin: .5% .5% .5% .5%;
+    height: 92%;
+    background-color: #000;
+    border-radius: 20px;
+    display: block;
+    align-items: center;
+    padding: 0px 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    visibility: hidden;
+}
+
 header .song-part {
     width: 74%;
     right: 5px;
@@ -80,6 +96,7 @@ header .song-part {
     padding: 0px 20px;
     overflow-y: scroll;
     overflow-x: hidden;
+    visibility: visible;
 }
 
 header .play-part {
@@ -124,7 +141,7 @@ header .menu-part .playlist h4 span::before {
     border: 2px solid #4c5262;
     border-radius: 50%;
     top: -4px;
-    transition: .3s;
+    transition: .3s linear;
 }
 
 header .menu-part .playlist h4:hover span::before {
@@ -372,6 +389,33 @@ header .play-part .song div div:hover {
     overflow: inherit;
     background-color: #303030;
     padding: 0px 5px 0px 5px;
+    position: relative;
+    align-items: center;
+}
+
+header .search-part .search-bar input {
+    width: 85%;
+    height: 40px;
+    font-size: 25px;
+    color: #d6d6d698;
+    background-color: #1d1d1d;
+    border: none;
+    border-radius: 20px;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 20px;
+}
+
+header .search-part .search-bar button {
+    width: 10%;
+    height: 40px;
+    color: #d6d6d698;
+    font-size: 20px;
+    background-color: #1d1d1d;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 header .song-part .top-bar {
@@ -451,7 +495,7 @@ header .song-part .recently-played .recently-played-song li {
     height: auto;
     list-style-type: none;
     margin-right: 10px;
-    transition: .3s linear;
+    /* transition: .3s linear; */
     cursor: pointer;
 }
 
@@ -466,13 +510,13 @@ header .song-part .recently-played .recently-played-song li .img-play .img-part 
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: .3s linear;
+    /* transition: .3s linear; */
 }
 
 header .song-part .recently-played .recently-played-song li .img-play .img-part img {
     width: 100%;
     height: 100%;
-    transition: .3s;
+    /* transition: .3s; */
 }
 
 header .song-part .recently-played .recently-played-song li:hover .img-play img {
@@ -495,7 +539,7 @@ header .song-part .recently-played .recently-played-song li .img-play .title {
     color: #d6d6d67e;
     text-align: center;
     margin: 5px 0px 5px 0px;
-    transition: .3s;
+    /* transition: .3s; */
 }
 
 header .song-part .recently-played .recently-played-song li .img-play .title:hover {

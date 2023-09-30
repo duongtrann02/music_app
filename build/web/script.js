@@ -50,7 +50,7 @@ const songs = [
         id: '1',
         songName: `Tình đã xa mờ`,
         artist: `Nguyên.`,
-        poster: "./src/song-poster/Tình đã xa mờ.png",
+        poster: "./src/song-poster/Tình đã xa mờ.jpg",
         url: './src/audio/Tình đã xa mờ.mp3'
     },
     {
@@ -66,6 +66,13 @@ const songs = [
         artist: `16 Typh`,
         poster: "./src/song-poster/M..jpg",
         url: './src/audio/M..mp3'
+    },
+    {
+        id: '4',
+        songName: `Anh là ai`,
+        artist: `DT tập rap, Huỳnh Công Hiếu`,
+        poster: "./src/song-poster/Anh là ai.jpg",
+        url: './src/audio/Anh là ai.mp3'
     }
 ]
 Array.from(document.getElementsByClassName('song-items')).forEach((element, i) => {
@@ -83,7 +90,7 @@ function render() {
                 <div class="img-play">
                     <div class="img-part">
                         <img src="${value.poster}" alt="">
-                        <i class="fa-solid playListPlay fa-circle-play" onclick = "PlaySong('${value.songName}')"></i>
+                        <i class="fa-solid playListPlay fa-circle-play" id="${value.id}" ></i>
                     </div>
                     <div class="title song-name">${value.songName}</div>
                     <div class="title artist">${value.artist}</div>
@@ -100,15 +107,15 @@ render()
 let masterPlay = document.getElementById('master-play');
 
 masterPlay.addEventListener('click', () => {
-  if (music.paused) {
-    music.play();
-    masterPlay.classList.remove('fa-play');
-    masterPlay.classList.add('fa-pause');
-  } else {
-    music.pause();
-    masterPlay.classList.remove('fa-pause');
-    masterPlay.classList.add('fa-play');
-  }
+    if (music.paused) {
+        music.play();
+        masterPlay.classList.remove('fa-play');
+        masterPlay.classList.add('fa-pause');
+    } else {
+        music.pause();
+        masterPlay.classList.remove('fa-pause');
+        masterPlay.classList.add('fa-play');
+    }
 });
 
 const makeAllPlays = () => {
@@ -119,23 +126,38 @@ const makeAllPlays = () => {
 }
 
 let index = 0;
+
 Array.from(document.getElementsByClassName('playListPlay')).forEach((element) => {
     element.addEventListener('click', (e) => {
-        index = e.target.id;
-        console.log(75, index);
+        index = e.target.id
+        // console.log(index);
+        for (let i = 0; i < songs.length; i++) {
+            if (songs[i].id == index) {
+                console.log(songs[i].songName)
+                music.src = `./src/audio/${songs[i].songName}.mp3`;
+                music.play();
+                masterPlay.classList.remove('fa-play')
+                masterPlay.classList.add('fa-pause')
+
+                document.getElementById('song-name').innerHTML = songs[i].songName
+                document.getElementById('artist').innerHTML = songs[i].artist
+                document.getElementById('poster').setAttribute('src',songs[i].poster)
+
+                // let song_title = songs.filter((ele) => {
+                //     return ele.id == index
+                // })
+        
+                // song_title.forEach(ele => {
+                //     let { songName } = ele
+                //     song_title.innerHTML = songName
+                // })
+            }
+        }
         makeAllPlays();
         e.target.classList.remove('fa-circle-play');
         e.target.classList.add('fa-circle-pause');
-        // music.src = `./src/audio/${index}.mp3`;
-        // music.play();
-        let song_title = songs.filter((ele)=>{
-            return ele.id == index
-        })
 
-        song_title.forEach(ele =>{
-            let {songName} = ele
-            song_title.innerHTML = songName
-        })
+        
     })
 })
 
@@ -144,29 +166,16 @@ let playingSongArtist = document.querySelector('.artist');
 
 
 
-function PlaySong(songName) {
-    console.log(songName)
-    music.src = `./src/audio/${songName}.mp3`;
-    music.play();
-    masterPlay.classList.remove('fa-play')
-    masterPlay.classList.add('fa-pause')
-}
-
-var next_song = document.getElementById('forward-song')
-
-next_song.addEventListener('click', ()=>{
-    console.log('next song')
-    let currentPlayed = music.src;
-    console.log(currentPlayed);
-
-    // for(var i=0; i<songs.length; i++){
-    //     if(songs[i].url==currentPlayed){
-    //         let nextSongName = songs[i+1].songName
-    //         console.log(nextSongName)
-    //         PlaySong(nextSongName)
-    //     }
-    // }
-})
+// function PlaySong(songName) {
+//     // console.log(songName)
+//     // for(var i = 0; i < songs.length; i++){
+//     //     if(song)
+//     // }
+//     music.src = `./src/audio/${songName}.mp3`;
+//     music.play();
+//     masterPlay.classList.remove('fa-play')
+//     masterPlay.classList.add('fa-pause')
+// }
 
 let currentStart = document.getElementById('current-start')
 let songLength = document.getElementById('song-length')
@@ -180,32 +189,51 @@ music.addEventListener('timeupdate', () => {
 
     let min = Math.floor(music_dur / 60)
     let sec = Math.floor(music_dur % 60)
-    if (sec<10) {
+    if (sec < 10) {
         sec = `0${sec}`
     }
     songLength.innerText = `${min}:${sec}`
 
     let min1 = Math.floor(music_curr / 60)
     let sec1 = Math.floor(music_curr % 60)
-    if (sec1<10) {
+    if (sec1 < 10) {
         sec1 = `0${sec1}`
     }
     currentStart.innerText = `${min1}:${sec1}`
 
-    let progressBar = parseInt((music.currentTime/music.duration)*100);
+    let progressBar = parseInt((music.currentTime / music.duration) * 100);
     seek.value = progressBar;
     let seekbar = seek.value;
     bar2.style.width = `${seekbar}%`
     dot.style.left = `${seekbar}%`
 })
 
-seek.addEventListener('change', ()=>{
+seek.addEventListener('change', () => {
     music.currentTime = seek.value * music.duration / 100;
 })
 
-music.addEventListener('ended', ()=>{
+music.addEventListener('ended', () => {
     masterPlay.classList.add('fa-play')
     masterPlay.classList.remove('fa-pause')
+    index+=1;
+    if(index>Array.from(document.getElementsByClassName('song-items')).length){
+        index=1
+    }
+    for (let i = 0; i < songs.length; i++) {
+        if (songs[i].id == index) {
+            console.log(songs[i].songName)
+            music.src = `./src/audio/${songs[i].songName}.mp3`;
+            music.play();
+            masterPlay.classList.remove('fa-play')
+            masterPlay.classList.add('fa-pause')
+            document.getElementById('song-name').innerHTML = songs[i].songName
+            document.getElementById('artist').innerHTML = songs[i].artist
+            document.getElementById('poster').setAttribute('src',songs[i].poster)
+        }
+    }
+    makeAllPlays();
+    document.getElementById(`${index}`).classList.remove('fa-circle-play');
+    document.getElementById(`${index}`).classList.add('fa-circle-pause');
 })
 
 let vol_icon = document.getElementById('vol-icon');
@@ -213,26 +241,26 @@ let vol = document.getElementById('vol');
 let vol_bar = document.getElementById('vol-bar');
 let vol_dot = document.getElementsByClassName('vol-dot')[0];
 
-vol.addEventListener('change', ()=>{
-    if(vol.value == 0 ){
+vol.addEventListener('change', () => {
+    if (vol.value == 0) {
         vol_icon.classList.remove('fa-volume-high')
         vol_icon.classList.remove('fa-volume-low')
         vol_icon.classList.remove('fa-volume-off')
         vol_icon.classList.add('fa-volume-xmark')
     }
-    if(vol.value > 0 ){
+    if (vol.value > 0) {
         vol_icon.classList.remove('fa-volume-high')
         vol_icon.classList.remove('fa-volume-low')
         vol_icon.classList.add('fa-volume-off')
         vol_icon.classList.remove('fa-volume-xmark')
     }
-    if(vol.value > 20 ){
+    if (vol.value > 20) {
         vol_icon.classList.remove('fa-volume-high')
         vol_icon.classList.add('fa-volume-low')
         vol_icon.classList.remove('fa-volume-off')
         vol_icon.classList.remove('fa-volume-xmark')
     }
-    if(vol.value > 60 ){
+    if (vol.value > 60) {
         vol_icon.classList.add('fa-volume-high')
         vol_icon.classList.remove('fa-volume-low')
         vol_icon.classList.remove('fa-volume-off')
@@ -242,5 +270,72 @@ vol.addEventListener('change', ()=>{
     let vol_a = vol.value
     vol_bar.style.width = `${vol_a}%}`;
     vol_dot.style.left = `${vol_a}%}`;
-    music.volume = vol_a/100;
+    music.volume = vol_a / 100;
+})
+
+let back = document.getElementById('backward-song')
+let next = document.getElementById('forward-song')
+
+back.addEventListener('click', ()=>{
+    console.log('previous song')
+    index-=1;
+    if(index<1){
+        index=Array.from(document.getElementsByClassName('song-items')).length
+    }
+    for (let i = 0; i < songs.length; i++) {
+        if (songs[i].id == index) {
+            console.log(songs[i].songName)
+            music.src = `./src/audio/${songs[i].songName}.mp3`;
+            music.play();
+            masterPlay.classList.remove('fa-play')
+            masterPlay.classList.add('fa-pause')
+            document.getElementById('song-name').innerHTML = songs[i].songName
+            document.getElementById('artist').innerHTML = songs[i].artist
+            document.getElementById('poster').setAttribute('src',songs[i].poster)
+        }
+    }
+    makeAllPlays();
+    document.getElementById(`${index}`).classList.remove('fa-circle-play');
+    document.getElementById(`${index}`).classList.add('fa-circle-pause');
+
+    
+})
+
+next.addEventListener('click', ()=>{
+    console.log('next song')
+    index+=1;
+    if(index>Array.from(document.getElementsByClassName('song-items')).length){
+        index=1
+    }
+    for (let i = 0; i < songs.length; i++) {
+        if (songs[i].id == index) {
+            console.log(songs[i].songName)
+            music.src = `./src/audio/${songs[i].songName}.mp3`;
+            music.play();
+            masterPlay.classList.remove('fa-play')
+            masterPlay.classList.add('fa-pause')
+            document.getElementById('song-name').innerHTML = songs[i].songName
+            document.getElementById('artist').innerHTML = songs[i].artist
+            document.getElementById('poster').setAttribute('src',songs[i].poster)
+        }
+    }
+    makeAllPlays();
+    document.getElementById(`${index}`).classList.remove('fa-circle-play');
+    document.getElementById(`${index}`).classList.add('fa-circle-pause');
+})
+
+var homeBtn = document.getElementById('home-btn')
+var searchBtn = document.getElementById('search-btn')
+
+searchBtn.addEventListener('click', ()=>{
+    document.querySelector('.song-part').setAttribute('style', 'visibility: hidden;')
+    document.querySelector('.search-part').setAttribute('style', 'visibility: visible;')
+    document.getElementById('home-btn').classList.remove('active')
+    document.getElementById('search-btn').classList.add('active')
+})
+homeBtn.addEventListener('click', ()=>{
+    document.querySelector('.song-part').setAttribute('style', 'visibility: visible;')
+    document.querySelector('.search-part').setAttribute('style', 'visibility: hidden;')
+    document.getElementById('home-btn').classList.add('active')
+    document.getElementById('search-btn').classList.remove('active')
 })

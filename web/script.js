@@ -323,3 +323,19 @@ next.addEventListener('click', ()=>{
     document.getElementById(`${index}`).classList.remove('fa-circle-play');
     document.getElementById(`${index}`).classList.add('fa-circle-pause');
 })
+
+var homeBtn = document.getElementById('home-btn')
+var searchBtn = document.getElementById('search-btn')
+
+searchBtn.addEventListener('click', ()=>{
+    document.querySelector('.song-part').setAttribute('style', 'visibility: hidden;')
+    document.querySelector('.search-part').setAttribute('style', 'visibility: visible;')
+    document.getElementById('home-btn').classList.remove('active')
+    document.getElementById('search-btn').classList.add('active')
+})
+homeBtn.addEventListener('click', ()=>{
+    document.querySelector('.song-part').setAttribute('style', 'visibility: visible;')
+    document.querySelector('.search-part').setAttribute('style', 'visibility: hidden;')
+    document.getElementById('home-btn').classList.add('active')
+    document.getElementById('search-btn').classList.remove('active')
+})

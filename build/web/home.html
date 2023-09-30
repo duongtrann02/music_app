@@ -13,8 +13,8 @@
     <header class="header">
         <div class="menu-part">
             <div class="playlist">
-                <h4 class="active"><span></span><i class="fa-solid fa-house"></i>Home</h4>
-                <h4><span></span><i class="fa-solid fa-magnifying-glass"></i>Search</h4>
+                <h4 class="active" id="home-btn"><span></span><i class="fa-solid fa-house"></i>Home</h4>
+                <h4 id="search-btn"><span></span><i class="fa-solid fa-magnifying-glass"></i>Search</h4>
             </div>
         </div>
         <div class="list-part">
@@ -37,6 +37,12 @@
                         </div>
                     </li>
                 </div>
+            </div>
+        </div>
+        <div class="search-part">
+            <div class="search-bar">
+                <input type="text">
+                <button type="submit">Search</button>
             </div>
         </div>
         <div class="song-part">
@@ -68,15 +74,15 @@
             <span id="song-length">00/00</span>
             <div class="vol">
                 <i class="fa-solid fa-volume-low" id="vol-icon"></i>
-                <input type="range" id="vol" min="0" value="50" max="100">
+                <input type="range" id="vol" min="0" value="100" max="100">
                 <div class="vol-bar" id="vol-bar"></div>
                 <div class="vol-dot" id="vol-dot"></div>
             </div>
             <div class="song">
-                <img src="./src/picture.png" alt="">
+                <img src="./src/picture.png" id="poster" alt="">
                 <div class="song-porfile">
-                    <div class="song-name">---</div>
-                    <div class="artist">---</div>
+                    <div class="song-name" id="song-name">---</div>
+                    <div class="artist" id="artist">---</div>
                 </div>
             </div>
 
