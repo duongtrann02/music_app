@@ -50,13 +50,22 @@ const songs = [
         id: '1',
         songName: `Tình đã xa mờ`,
         artist: `Nguyên.`,
-        poster: "./src/song-poster/Tình đã xa mờ.png"
+        poster: "./src/song-poster/Tình đã xa mờ.png",
+        url: './src/audio/Tình đã xa mờ.mp3'
     },
     {
         id: '2',
         songName: `Em khiến anh muốn trở thành người Hà Nội`,
         artist: `Negav`,
-        poster: "./src/song-poster/Em khiến anh muốn trở thành người Hà Nội.jpg"
+        poster: "./src/song-poster/Em khiến anh muốn trở thành người Hà Nội.jpg",
+        url: './src/audio/Em khiến anh muốn trở thành người Hà Nội.mp3'
+    },
+    {
+        id: '3',
+        songName: `M.`,
+        artist: `16 Typh`,
+        poster: "./src/song-poster/M..jpg",
+        url: './src/audio/M..mp3'
     }
 ]
 Array.from(document.getElementsByClassName('song-items')).forEach((element, i) => {
@@ -143,7 +152,21 @@ function PlaySong(songName) {
     masterPlay.classList.add('fa-pause')
 }
 
+var next_song = document.getElementById('forward-song')
 
+next_song.addEventListener('click', ()=>{
+    console.log('next song')
+    let currentPlayed = music.src;
+    console.log(currentPlayed);
+
+    // for(var i=0; i<songs.length; i++){
+    //     if(songs[i].url==currentPlayed){
+    //         let nextSongName = songs[i+1].songName
+    //         console.log(nextSongName)
+    //         PlaySong(nextSongName)
+    //     }
+    // }
+})
 
 let currentStart = document.getElementById('current-start')
 let songLength = document.getElementById('song-length')
@@ -221,4 +244,3 @@ vol.addEventListener('change', ()=>{
     vol_dot.style.left = `${vol_a}%}`;
     music.volume = vol_a/100;
 })
-
