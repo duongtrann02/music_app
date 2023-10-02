@@ -41,13 +41,13 @@
         </div>
         <div class="search-part">
             <div class="search-bar">
-                <input type="text">
+                <input type="text" placeholder="Search for songs, artists, albums, ...">
                 <button type="submit">Search</button>
             </div>
         </div>
         <div class="song-part">
             <div class="top-bar">
-                <div class="login-btn" onclick="handleBtnLogin()">Login</div>
+                <div class="login-btn" onclick="handleBtnLogin()">Log in / Sign up</div>
                 <div class="upload">Upload</div>
                 <img src="./src/profile-picture/profile-picture.jpg" alt="">
             </div>
@@ -73,7 +73,7 @@
             </div>
             <span id="song-length">00/00</span>
             <div class="vol">
-                <i class="fa-solid fa-volume-low" id="vol-icon"></i>
+                <i class="fa-solid fa-volume-high" id="vol-icon"></i>
                 <input type="range" id="vol" min="0" value="100" max="100">
                 <div class="vol-bar" id="vol-bar"></div>
                 <div class="vol-dot" id="vol-dot"></div>
@@ -100,6 +100,7 @@
                 <i class="fa fa-lock"></i>
             </label>
             <input type="password" name="password" placeholder="Password" id="password" required>
+            <div class="sign-up">Haven't got an account?</div>
             <input type="submit" value="Login">
         </form>
     </div>

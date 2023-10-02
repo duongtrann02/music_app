@@ -43,7 +43,7 @@ function closeLoginScreen() {
 
 
 
-const music = new Audio('./src/audio/Em khiến anh muốn trở thành người Hà Nội.mp3');
+const music = new Audio('./src/audio/Anh là ai.mp3');
 let playing = false
 const songs = [
     {
@@ -74,6 +74,14 @@ const songs = [
         poster: "./src/song-poster/Anh là ai.jpg",
         url: './src/audio/Anh là ai.mp3'
     }
+    ,
+    {
+        id: '5',
+        songName: `Em nhiệt tình như lửa Anh lạnh lùng như băng`,
+        artist: `Đào Tử`,
+        poster: "./src/song-poster/Em nhiệt tình như lửa Anh lạnh lùng như băng.jpg",
+        url: './src/audio/Em nhiệt tình như lửa Anh lạnh lùng như băng.mp3'
+    }
 ]
 Array.from(document.getElementsByClassName('song-items')).forEach((element, i) => {
     element.getElementsByTagName('img')[0].src = songs[i].poster;
@@ -89,8 +97,8 @@ function render() {
             <li class="song-items">
                 <div class="img-play">
                     <div class="img-part">
-                        <img src="${value.poster}" alt="">
-                        <i class="fa-solid playListPlay fa-circle-play" id="${value.id}" ></i>
+                        <img class="img" src="${value.poster}" id="${value.id}" alt="">
+                        <i class="playListPlay" ></i>
                     </div>
                     <div class="title song-name">${value.songName}</div>
                     <div class="title artist">${value.artist}</div>
@@ -104,6 +112,8 @@ function render() {
 }
 
 render()
+
+
 let masterPlay = document.getElementById('master-play');
 
 masterPlay.addEventListener('click', () => {
@@ -118,19 +128,19 @@ masterPlay.addEventListener('click', () => {
     }
 });
 
-const makeAllPlays = () => {
-    Array.from(document.getElementsByClassName('playListPlay')).forEach((element) => {
-        element.classList.add('fa-circle-play');
-        element.classList.remove('fa-circle-pause');
-    })
-}
+// const makeAllPlays = () => {
+//     Array.from(document.getElementsByClassName('song')).forEach((element) => {
+//         element.classList.add('fa-circle-play');
+//         element.classList.remove('fa-circle-pause');
+//     })
+// }
 
 let index = 0;
 
-Array.from(document.getElementsByClassName('playListPlay')).forEach((element) => {
+Array.from(document.getElementsByClassName('img')).forEach((element) => {
     element.addEventListener('click', (e) => {
         index = e.target.id
-        // console.log(index);
+        console.log(143, index);
         for (let i = 0; i < songs.length; i++) {
             if (songs[i].id == index) {
                 console.log(songs[i].songName)
@@ -143,19 +153,11 @@ Array.from(document.getElementsByClassName('playListPlay')).forEach((element) =>
                 document.getElementById('artist').innerHTML = songs[i].artist
                 document.getElementById('poster').setAttribute('src',songs[i].poster)
 
-                // let song_title = songs.filter((ele) => {
-                //     return ele.id == index
-                // })
-        
-                // song_title.forEach(ele => {
-                //     let { songName } = ele
-                //     song_title.innerHTML = songName
-                // })
             }
         }
-        makeAllPlays();
-        e.target.classList.remove('fa-circle-play');
-        e.target.classList.add('fa-circle-pause');
+        // makeAllPlays();
+        // e.target.classList.remove('fa-circle-play');
+        // e.target.classList.add('fa-circle-pause');
 
         
     })
@@ -231,9 +233,9 @@ music.addEventListener('ended', () => {
             document.getElementById('poster').setAttribute('src',songs[i].poster)
         }
     }
-    makeAllPlays();
-    document.getElementById(`${index}`).classList.remove('fa-circle-play');
-    document.getElementById(`${index}`).classList.add('fa-circle-pause');
+    // makeAllPlays();
+    // document.getElementById(`${index}`).classList.remove('fa-circle-play');
+    // document.getElementById(`${index}`).classList.add('fa-circle-pause');
 })
 
 let vol_icon = document.getElementById('vol-icon');
@@ -294,9 +296,9 @@ back.addEventListener('click', ()=>{
             document.getElementById('poster').setAttribute('src',songs[i].poster)
         }
     }
-    makeAllPlays();
-    document.getElementById(`${index}`).classList.remove('fa-circle-play');
-    document.getElementById(`${index}`).classList.add('fa-circle-pause');
+    // makeAllPlays();
+    // document.getElementById(`${index}`).classList.remove('fa-circle-play');
+    // document.getElementById(`${index}`).classList.add('fa-circle-pause');
 
     
 })
@@ -319,9 +321,9 @@ next.addEventListener('click', ()=>{
             document.getElementById('poster').setAttribute('src',songs[i].poster)
         }
     }
-    makeAllPlays();
-    document.getElementById(`${index}`).classList.remove('fa-circle-play');
-    document.getElementById(`${index}`).classList.add('fa-circle-pause');
+    // makeAllPlays();
+    // document.getElementById(`${index}`).classList.remove('fa-circle-play');
+    // document.getElementById(`${index}`).classList.add('fa-circle-pause');
 })
 
 var homeBtn = document.getElementById('home-btn')
