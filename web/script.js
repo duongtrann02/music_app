@@ -82,6 +82,14 @@ const songs = [
         poster: "./src/song-poster/Em nhiệt tình như lửa Anh lạnh lùng như băng.jpg",
         url: './src/audio/Em nhiệt tình như lửa Anh lạnh lùng như băng.mp3'
     }
+    ,
+    {
+        id: '6',
+        songName: `Anh ghét mình vì còn nhớ em của Vinh Khuất nhưng buồn hơn`,
+        artist: `hqhuy`,
+        poster: "./src/song-poster/Anh ghét mình vì còn nhớ em của Vinh Khuất nhưng buồn hơn.jpg",
+        url: './src/audio/Anh ghét mình vì còn nhớ em của Vinh Khuất nhưng buồn hơn.mp3'
+    }
 ]
 Array.from(document.getElementsByClassName('song-items')).forEach((element, i) => {
     element.getElementsByTagName('img')[0].src = songs[i].poster;

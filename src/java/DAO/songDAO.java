@@ -10,6 +10,7 @@ import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -40,8 +41,8 @@ public class songDAO {
                         rs.getString("songPoster"),
                         rs.getString("songURL"));
             }
-        }catch(Exception e){
-            Logger.getLogger(songDAO.class.getName()).log(Level.SEVERE, null, e);
+        }catch(SQLException ex){
+            Logger.getLogger(songDAO.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             if(stm!=null){
                 try {
@@ -62,4 +63,31 @@ public class songDAO {
         return listSong;
     }
     
+    public static void insert(song s){
+        Connection con = null;
+        PreparedStatement stm = null;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(url,u,p);
+            
+            
+        }catch(SQLException ex){
+            Logger.getLogger(songDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            if(stm!=null){
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(songDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(con!=null){
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(songDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }
