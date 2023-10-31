@@ -13,47 +13,57 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-
 import org.apache.tomcat.dbcp.dbcp2.DriverManagerConnectionFactory;
+import org.apache.tomcat.jakartaee.commons.io.IOUtils;
+
 /**
  *
  * @author Hi
  */
-@WebServlet(name="LoginServlet", urlPatterns={"/LoginServlet"})
+@WebServlet(name = "LoginServlet", urlPatterns = { "/LoginServlet" })
 public class LoginServlet extends HttpServlet {
-   
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html");
-        
+
         PrintWriter out = response.getWriter();
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
+        Connection con = null;
+        Statement stm = null;
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicapp","root", "");
-            Statement stm = con.createStatement();
-            String sql = "select * from accounts where username = '"+username+"' and password = '"+password+"'";
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/musicapp", "root", "");
+            stm = con.createStatement();
+            String sql = "select * from accounts where username = '" + username + "' and password = '" + password + "'";
             ResultSet rs = stm.executeQuery(sql);
-            if(rs.next()){
+            if (rs.next()) {
                 response.sendRedirect("home.html");
-            }else{
-                out.print("cant login");
+            } else {
+                response.sendRedirect("index.html");
             }
-            con.close();
+             con.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
     }
+    
+    
 }

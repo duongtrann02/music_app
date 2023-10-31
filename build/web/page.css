@@ -1,0 +1,13 @@
+.object{
+    height: 50px;
+    width: 100px;
+    border: aqua solid 3px;
+    background-color: blueviolet;
+    transition: width 1s, height 1s, border 1s, background-color 1s;
+}
+.object:hover{
+    height: 100px;
+    width: 50px;
+    background-color: aqua;
+    border: blueviolet solid 3px;
+}

@@ -24,7 +24,7 @@ public class songDAO {
     static String u="root";
     static String p="";
     
-    public static List<song> findAll(){
+    public static List<song> findAll() throws ClassNotFoundException{
         List<song> listSong = new ArrayList<>();
         Connection con = null;
         Statement stm = null;
@@ -63,7 +63,7 @@ public class songDAO {
         return listSong;
     }
     
-    public static void insert(song s){
+    public static void insert(song s) throws ClassNotFoundException{
         Connection con = null;
         PreparedStatement stm = null;
         try{

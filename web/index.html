@@ -47,17 +47,21 @@
         </div>
         <div class="song-part">
             <div class="top-bar">
-                <div class="login-btn" onclick="handleBtnLogin()">Log in / Sign up</div>
-                <div class="upload">Upload</div>
-                <img src="./src/profile-picture/profile-picture.jpg" alt="">
+                <div class="upload-btn" onclick="handleBtnUploadSc()">Upload</div>
+                <div class="login-btn" onclick="handleBtnLoginSc()">Log in / Sign up</div>
             </div>
             <div class="recently-played">
                 <h4>Recently Played</h4>
-                <div class="recently-played-song">
+                <div class="recently-played-song item-song">
                     <!-- Render song -->
                 </div>
             </div>
-            
+            <div class="recently-played">
+                <h4>Low G</h4>
+                <div class="recently-played-song item-song-2">
+                    <!-- Render song -->
+                </div>  
+            </div>
         </div>
         <div class="play-part">
             <div class="control-btn">
@@ -89,7 +93,7 @@
         </div>
     </header>
     <div class="login-screen">
-        <div class="cancel-btn" onclick="closeLoginScreen()"></div>
+        <div class="cancel-btn" onclick="closeScreen()"></div>
         <h1>Login</h1>
         <form action="LoginServlet" method="post">
             <label for="username">
@@ -100,11 +104,53 @@
                 <i class="fa fa-lock"></i>
             </label>
             <input type="password" name="password" placeholder="Password" id="password" required>
-            <div class="sign-up">Haven't got an account?</div>
+            <div class="sign-up" onclick="handleBtnSignupSc()">Haven't got an account?</div>
             <input type="submit" value="Login">
         </form>
     </div>
-    <script src="script.js"></script>
+    <div class="Register-screen">
+        <div class="cancel-btn" onclick="closeScreen()"></div>
+        <h1>Sign Up</h1>
+        <form action="SignUpServlet" method="post">
+            <label for="username-su">
+                <i class="fa fa-user"></i>
+            </label>
+            <input type="text" name="username-su" placeholder="Username" id="username-su" required>
+            <label for="password-su">
+                <i class="fa fa-lock"></i>
+            </label>
+            <input type="password" name="password-su" placeholder="Password" id="password-su" required>
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+    <div class="upload-screen">
+        <div class="cancel-btn closeUploadScreen" onclick="closeScreen()"></div>
+        <div class="upload-part">
+            <h1>>Upload(in progress...)<</h1>
+            <div id="part upload-song-name">
+                <p>Song Name</p>
+                <input id="get-song-name" type="text" placeholder="Input here">
+            </div>
+            <div id="part upload-artist-name">
+                <p>Artist</p>
+                <input id="get-artist-name" type="text" placeholder="Input here">
+            </div>
+            <div id="upload-poster">
+                <p>Poster</p>
+                <input id="get-poster" type="file">
+            </div>
+            <div id="upload-song">
+                <p>Song</p>
+                <input id="get-song" type="file">
+            </div>
+            <button class="upload-submit" onclick="uploadSubmit()">-Upload-</button>
+        </div>
+    </div>
+    <footer>
+        <!--render here-->
+        <!-- copyright -->
+    </footer>
 </body>
+<script src="script.js"></script>
 
 </html>

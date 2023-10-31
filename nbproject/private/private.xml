@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/web/styles.css</file>
             <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/web/script.js</file>
             <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/src/java/controller/LoginServlet.java</file>
+            <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/src/java/controller/LogOutServlet.java</file>
             <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/web/index.html</file>
+            <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/src/java/controller/SignUpServlet.java</file>
             <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/web/home.html</file>
-            <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/src/java/entity/userLogin.java</file>
-            <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/src/java/entity/userInfo.java</file>
             <file>file:/C:/Users/Hi/Documents/NetBeansProjects/musicapp/src/java/DAO/songDAO.java</file>
         </group>
     </open-files>
